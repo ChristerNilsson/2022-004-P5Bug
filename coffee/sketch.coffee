@@ -10,7 +10,7 @@ g = (title,bg) ->
 	rect 200,200,100,100
 	cv.textAlign CENTER
 	noFill()
-	cv.ellipse 200,400,30,30
+	ellipse 200,400,30,30
 	fill "black"
 	cv.text title,250,250
 	cv.text displayDensity(),250,350
