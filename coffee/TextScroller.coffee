@@ -15,7 +15,7 @@ class TextScroller
 
 	doit : (w,txt) ->
 		if not @draw then return
-		@pg = createGraphics w, @dh
+		@pg = createGraphics 2000, @dh # w
 		@pg.background "green"
 		@pg.textSize @ts
 		@pg.fill "black"
