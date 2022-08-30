@@ -2,16 +2,19 @@ class TextScroller
 	constructor : (@dx,@dy,@dw,@dh,@ts,@text) ->
 		push()
 		textSize @ts
+		@visible = @text != ''
 		@sz = Math.round textWidth @text
-		if @sz <= @dw # scroll behövs ej
+		@scroll = @sz > @dw
+		if not @scroll # scroll behövs ej
 			@doit @dw, @text
 		else # scrolla
 			@sz = Math.round textWidth @text + ' • '
 			@doit @sz+@dw+100, @text + ' • ' + @text
 			@p = 0 
-		pop()
+		pop() 
 
 	doit : (w,txt) ->
+		if not @draw then return
 		@pg = createGraphics w, @dh
 		@pg.background "green"
 		@pg.textSize @ts
@@ -20,7 +23,8 @@ class TextScroller
 		@pg.text txt,0,@dh/2
 
 	draw : () ->
-		if @p == null # scroll behövs ej
+		if not @visible then return 
+		if not @scroll # scroll behövs ej
 			image @pg,@dx,@dy
 		else # scrolla
 			image @pg,@dx,@dy,@dw,@dh,@p,0,@dw,@dh
